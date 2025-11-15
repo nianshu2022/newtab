@@ -30,6 +30,43 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Create Cloudflare Pages Project (if not exists)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          echo "🔍 检查项目是否存在..."
+          
+          # 检查项目是否存在
+          RESPONSE=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/newtab-navigation" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type: application/json")
+          
+          # 解析响应，检查是否成功
+          if echo "$RESPONSE" | grep -q '"success":true'; then
+            echo "✅ 项目已存在"
+          else
+            echo "📦 项目不存在，正在创建..."
+            
+            # 创建项目
+            CREATE_RESPONSE=$(curl -s -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects" \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d '{
+                "name": "newtab-navigation",
+                "production_branch": "main"
+              }')
+            
+            if echo "$CREATE_RESPONSE" | grep -q '"success":true'; then
+              echo "✅ 项目创建成功"
+            elif echo "$CREATE_RESPONSE" | grep -q "already exists"; then
+              echo "✅ 项目已存在（可能在创建过程中已创建）"
+            else
+              echo "⚠️ 创建项目时可能遇到问题，但继续部署..."
+              echo "响应: $CREATE_RESPONSE"
+            fi
+          fi
+
       - name: Check Secrets
         run: |
           echo "🔍 检查 Secrets 配置..."
