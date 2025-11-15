@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站导航</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 搜索区域 -->
+        <div class="search-section">
+            <div class="search-container">
+                <div class="search-engine-selector">
+                    <button class="engine-btn active" data-engine="baidu">百度</button>
+                    <button class="engine-btn" data-engine="google">谷歌</button>
+                    <button class="engine-btn" data-engine="github">GitHub</button>
+                </div>
+                <div class="search-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="输入搜索内容..."
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn" class="search-btn">搜索</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 网站导航区域 -->
+        <div class="navigation-section">
+            <div id="navigationContainer" class="navigation-container">
+                <!-- 动态加载网站分组 -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/scripts/main.js"></script>
+</body>
+</html>
+

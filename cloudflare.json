@@ -1,0 +1,5 @@
+{
+  "$schema": "https://developers.cloudflare.com/workers/configuration/workers-config/worker-configuration-schema.json",
+  "pages_build_output_dir": "dist"
+}
+
