@@ -14,3 +14,42 @@ fs.copyFileSync(htmlSource, htmlDest);
 
 console.log('✓ HTML 文件已复制');
 
+// 复制 public 目录
+const publicDir = path.join(__dirname, '..', 'public');
+const distPublicDir = path.join(distDir, 'public');
+
+function copyDirectory(src, dest) {
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
+  }
+  
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  
+  for (let entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    
+    if (entry.isDirectory()) {
+      copyDirectory(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
+if (fs.existsSync(publicDir)) {
+  copyDirectory(publicDir, distPublicDir);
+  console.log('✓ public 目录已复制');
+}
+
+// 同时创建 img 目录的符号链接或直接复制到 dist/img（为了兼容性）
+const publicImgDir = path.join(publicDir, 'img');
+const distImgDir = path.join(distDir, 'img');
+if (fs.existsSync(publicImgDir)) {
+  if (!fs.existsSync(distImgDir)) {
+    fs.mkdirSync(distImgDir, { recursive: true });
+  }
+  copyDirectory(publicImgDir, distImgDir);
+  console.log('✓ img 目录已复制到 dist/img');
+}
+

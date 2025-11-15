@@ -14,7 +14,7 @@ export interface SiteGroup {
 export const siteGroups: SiteGroup[] = [
   {
     id: "development",
-    name: "开发工具",
+    name: "程序员",
     sites: [
       {
         id: "github",
@@ -23,88 +23,190 @@ export const siteGroups: SiteGroup[] = [
         icon: "https://github.githubassets.com/favicons/favicon.png"
       },
       {
-        id: "stackoverflow",
-        name: "Stack Overflow",
-        url: "https://stackoverflow.com",
-        icon: "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"
+        id: "fontawesome",
+        name: "Font Awesome",
+        url: "https://fontawesome.com/",
+        icon: "https://fontawesome.com/images/favicon/apple-touch-icon.png"
       },
       {
-        id: "mdn",
-        name: "MDN Web Docs",
-        url: "https://developer.mozilla.org",
-        icon: "https://developer.mozilla.org/favicon-48x48.png"
+        id: "tencent-cloud",
+        name: "腾讯云",
+        url: "https://cloud.tencent.com/",
+        icon: "https://cloudcache.tencent-cloud.com/qcloud/favicon.ico?t=201902181234"
       },
       {
-        id: "npm",
-        name: "npm",
-        url: "https://www.npmjs.com",
-        icon: "https://static.npmjs.com/58a19602036db1daee0d7863c94673a4.png"
+        id: "baidu-cloud",
+        name: "百度云",
+        url: "https://cloud.baidu.com/",
+        icon: "https://bce.bdstatic.com/img/favicon.ico"
+      },
+      {
+        id: "cloudflare",
+        name: "Cloudflare",
+        url: "https://dash.cloudflare.com/",
+        icon: "https://dash.cloudflare.com/favicon.ico"
+      }
+    ]
+  },
+  {
+    id: "ai",
+    name: "Ai",
+    sites: [
+      {
+        id: "metaso",
+        name: "秘塔AI",
+        url: "https://metaso.cn",
+        icon: "https://metaso.cn/apple-touch-icon.png"
+      },
+      {
+        id: "deepseek",
+        name: "Deepseek",
+        url: "https://chat.deepseek.com",
+        icon: "https://cdn.deepseek.com/chat/icon.png"
+      },
+      {
+        id: "chatgpt",
+        name: "ChatGpt",
+        url: "https://chatgpt.com",
+        icon: "/img/chatgpt.ico"
+      },
+      {
+        id: "nano-ai",
+        name: "纳米AI",
+        url: "https://www.n.cn/chathome",
+        icon: "https://p1.ssl.qhimg.com/t11098f6bcdb3c1c166a74ad70c.png"
       }
     ]
   },
   {
     id: "design",
-    name: "设计资源",
+    name: "设计",
     sites: [
       {
-        id: "dribbble",
-        name: "Dribbble",
-        url: "https://dribbble.com",
-        icon: "https://cdn.dribbble.com/assets/dribbble-ball-icon-4e54c54abecfef09e66d4e70a08b2d2c.ico"
+        id: "processon",
+        name: "ProcessOn",
+        url: "https://www.processon.com/",
+        icon: "https://www.processon.com/public_login/favicon.983368c6.ico"
       },
       {
-        id: "behance",
-        name: "Behance",
-        url: "https://www.behance.net",
-        icon: "https://a5.behance.net/favicon.ico"
+        id: "mockplus-rp",
+        name: "摹客RP",
+        url: "https://rp.mockplus.cn/",
+        icon: "https://img02.mockplus.cn/idoc/image/2020-10-27/fc6f8811-17fb-11eb-a26f-b3a70a815e7f.png"
       },
       {
-        id: "figma",
-        name: "Figma",
-        url: "https://www.figma.com",
-        icon: "https://static.figma.com/app/icon/1/favicon.png"
+        id: "huaban",
+        name: "花瓣",
+        url: "https://huaban.com",
+        icon: "https://cdn.dancf.com/fe-assets/20250424/3277dc6bd2124e104a49b0a0b6a95997.svg"
+      },
+      {
+        id: "mastergo",
+        name: "MasterGo",
+        url: "https://mastergo.com/",
+        icon: "/img/MasterGo.png"
+      },
+      {
+        id: "js-design",
+        name: "即时设计",
+        url: "https://js.design/workspace",
+        icon: "https://img.js.design/assets/webImg/favicon.ico"
       }
     ]
   },
   {
-    id: "social",
-    name: "社交媒体",
+    id: "blog",
+    name: "博客",
     sites: [
       {
-        id: "twitter",
-        name: "Twitter",
-        url: "https://twitter.com",
-        icon: "https://abs.twimg.com/favicons/twitter.3.ico"
+        id: "csdn",
+        name: "CSDN",
+        url: "http://www.csdn.net",
+        icon: "https://g.csdnimg.cn/static/logo/favicon32.ico"
       },
       {
-        id: "reddit",
-        name: "Reddit",
-        url: "https://www.reddit.com",
-        icon: "https://www.redditstatic.com/desktop2x/img/favicon/favicon-32x32.png"
+        id: "cnblogs",
+        name: "博客园",
+        url: "https://www.cnblogs.com",
+        icon: "/img/cnblogs.ico"
       },
       {
-        id: "youtube",
-        name: "YouTube",
-        url: "https://www.youtube.com",
-        icon: "https://www.youtube.com/s/desktop/favicon.ico"
+        id: "zhihu",
+        name: "知乎",
+        url: "https://www.zhihu.com",
+        icon: "https://static.zhihu.com/heifetz/favicon.ico"
       }
     ]
   },
   {
-    id: "news",
-    name: "新闻资讯",
+    id: "media",
+    name: "自媒体",
     sites: [
       {
-        id: "hackernews",
-        name: "Hacker News",
-        url: "https://news.ycombinator.com",
-        icon: "https://news.ycombinator.com/favicon.ico"
+        id: "weixin-mp",
+        name: "微信公众平台",
+        url: "https://mp.weixin.qq.com",
+        icon: "https://res.wx.qq.com/a/fed_upload/9300e7ac-cec5-4454-b75c-f92260dd5b47/logo-mp.ico"
       },
       {
-        id: "producthunt",
-        name: "Product Hunt",
-        url: "https://www.producthunt.com",
-        icon: "https://www.producthunt.com/favicon.ico"
+        id: "md-editor",
+        name: "Markdown 编辑器",
+        url: "https://md.doocs.org/",
+        icon: "https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/gh/doocs/md/images/favicon.png"
+      },
+      {
+        id: "maoyan",
+        name: "猫眼票房",
+        url: "https://piaofang.maoyan.com",
+        icon: "https://obj.pipi.cn/festatic/piaofang/moviepro/favicon.ico"
+      },
+      {
+        id: "douban-tv",
+        name: "豆瓣",
+        url: "https://movie.douban.com/tv/",
+        icon: "https://www.douban.com/favicon.ico"
+      },
+      {
+        id: "toutiao",
+        name: "今日头条",
+        url: "https://www.toutiao.com/",
+        icon: "https://sf3-cdn-tos.douyinstatic.com/obj/eden-cn/uhbfnupkbps/toutiao_favicon.ico"
+      }
+    ]
+  },
+  {
+    id: "private",
+    name: "私有部署",
+    sites: [
+      {
+        id: "lovehub",
+        name: "0lovehub",
+        url: "https://zc.nianshu2022.cn",
+        icon: "https://zc.nianshu2022.cn/favicon.ico"
+      },
+      {
+        id: "with-you",
+        name: "With You",
+        url: "https://time.nianshu2022.cn",
+        icon: "https://time.nianshu2022.cn/favicon.ico"
+      },
+      {
+        id: "uptime",
+        name: "Uptime",
+        url: "https://uptime.nianshu2022.cn",
+        icon: "https://uptime.nianshu2022.cn/favicon.ico"
+      },
+      {
+        id: "mv",
+        name: "MoonTV",
+        url: "https://mv.nianshu2022.cn",
+        icon: "https://mv.nianshu2022.cn/favicon.ico"
+      },
+      {
+        id: "nginx",
+        name: "Nginx",
+        url: "https://nginx.nianshu2022.cn",
+        icon: "https://nginx.nianshu2022.cn/images/favicons/favicon.ico"
       }
     ]
   }

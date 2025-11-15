@@ -11,20 +11,24 @@
         <!-- 搜索区域 -->
         <div class="search-section">
             <div class="search-container">
-                <div class="search-engine-selector">
-                    <button class="engine-btn active" data-engine="baidu">百度</button>
-                    <button class="engine-btn" data-engine="google">谷歌</button>
-                    <button class="engine-btn" data-engine="github">GitHub</button>
-                </div>
                 <div class="search-input-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
                     <input 
                         type="text" 
                         id="searchInput" 
                         class="search-input" 
-                        placeholder="输入搜索内容..."
+                        placeholder="搜索..."
                         autocomplete="off"
                     >
-                    <button id="searchBtn" class="search-btn">搜索</button>
+                    <button id="searchBtn" class="search-btn" title="搜索">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -35,6 +39,20 @@
                 <!-- 动态加载网站分组 -->
             </div>
         </div>
+
+        <!-- 备案信息 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="icp-info">
+                    <img src="/img/miit.ico" alt="ICP备案" class="icp-icon">
+                    <span>陇ICP备2023001612号-1</span>
+                </a>
+                <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=62010202004273" target="_blank" rel="noopener noreferrer" class="ga-info">
+                    <img src="/img/mps.ico" alt="公安部备案" class="ga-icon">
+                    <span>甘公网安备62010202004273号</span>
+                </a>
+            </div>
+        </footer>
     </div>
 
     <script type="module" src="/scripts/main.js"></script>

@@ -1,5 +1,5 @@
-import { siteGroups } from '../data/sites';
-import { SearchEngine, searchEngineUrls } from '../types/search';
+import { siteGroups } from '../data/sites.js';
+import { SearchEngine, searchEngineUrls } from '../types/search.js';
 
 class NavigationApp {
   private currentEngine: SearchEngine = 'baidu';
@@ -12,31 +12,18 @@ class NavigationApp {
   }
 
   private init(): void {
+    console.log('🚀 初始化导航应用...');
+    
     this.searchInput = document.getElementById('searchInput') as HTMLInputElement;
     this.searchBtn = document.getElementById('searchBtn') as HTMLButtonElement;
     this.navigationContainer = document.getElementById('navigationContainer');
 
-    this.setupSearchEngine();
+    if (!this.searchInput) console.error('❌ searchInput 未找到');
+    if (!this.searchBtn) console.error('❌ searchBtn 未找到');
+    if (!this.navigationContainer) console.error('❌ navigationContainer 未找到');
+
     this.setupSearchInput();
     this.renderNavigation();
-  }
-
-  private setupSearchEngine(): void {
-    const engineButtons = document.querySelectorAll('.engine-btn');
-    
-    engineButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // 移除所有 active 类
-        engineButtons.forEach(b => b.classList.remove('active'));
-        // 添加 active 类到当前按钮
-        btn.classList.add('active');
-        
-        const engine = (btn as HTMLElement).dataset.engine as SearchEngine;
-        if (engine) {
-          this.currentEngine = engine;
-        }
-      });
-    });
   }
 
   private setupSearchInput(): void {
@@ -67,12 +54,25 @@ class NavigationApp {
   }
 
   private renderNavigation(): void {
-    if (!this.navigationContainer) return;
+    if (!this.navigationContainer) {
+      console.error('❌ navigationContainer 未找到');
+      return;
+    }
+
+    console.log('📦 开始渲染导航，分组数量:', siteGroups.length);
+    
+    if (siteGroups.length === 0) {
+      console.warn('⚠️ siteGroups 为空，没有数据可显示');
+      return;
+    }
 
     siteGroups.forEach(group => {
+      console.log('📁 渲染分组:', group.name, '网站数量:', group.sites.length);
       const groupElement = this.createGroupElement(group);
       this.navigationContainer?.appendChild(groupElement);
     });
+    
+    console.log('✅ 导航渲染完成');
   }
 
   private createGroupElement(group: typeof siteGroups[0]): HTMLElement {
