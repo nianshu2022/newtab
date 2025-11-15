@@ -1,7 +1,7 @@
 {
   "name": "newtab-navigation",
   "version": "1.0.0",
-  "description": "功能丰富的网站导航网站",
+  "description": "功能丰富的导航新标签页",
   "main": "index.js",
   "scripts": {
     "build": "tsc && npm run build:assets",
