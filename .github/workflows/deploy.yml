@@ -32,16 +32,35 @@ jobs:
 
       - name: Check Secrets
         run: |
-          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
-            echo "❌ 错误: CLOUDFLARE_API_TOKEN 未配置"
-            echo "请在 GitHub 仓库 Settings → Secrets and variables → Actions 中添加 CLOUDFLARE_API_TOKEN"
+          echo "🔍 检查 Secrets 配置..."
+          echo "CLOUDFLARE_API_TOKEN 是否存在: $([ -n "${{ secrets.CLOUDFLARE_API_TOKEN }}" ] && echo '是' || echo '否')"
+          echo "CLOUDFLARE_ACCOUNT_ID 是否存在: $([ -n "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ] && echo '是' || echo '否')"
+          
+          # 检查 API Token
+          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ] || [ "${{ secrets.CLOUDFLARE_API_TOKEN }}" == "" ]; then
+            echo "❌ 错误: CLOUDFLARE_API_TOKEN 未配置或为空"
+            echo ""
+            echo "请确认："
+            echo "1. 访问 https://github.com/nianshu2022/newtab/settings/secrets/actions"
+            echo "2. 检查是否存在名为 'CLOUDFLARE_API_TOKEN' 的 Secret（注意大小写）"
+            echo "3. 如果不存在，点击 'New repository secret' 创建"
+            echo "4. 如果已存在，检查值是否为空"
             exit 1
           fi
-          if [ -z "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ]; then
-            echo "❌ 错误: CLOUDFLARE_ACCOUNT_ID 未配置"
-            echo "请在 GitHub 仓库 Settings → Secrets and variables → Actions 中添加 CLOUDFLARE_ACCOUNT_ID"
+          
+          # 检查 Account ID
+          if [ -z "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ] || [ "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" == "" ]; then
+            echo "❌ 错误: CLOUDFLARE_ACCOUNT_ID 未配置或为空"
+            echo ""
+            echo "请确认："
+            echo "1. 访问 https://github.com/nianshu2022/newtab/settings/secrets/actions"
+            echo "2. 检查是否存在名为 'CLOUDFLARE_ACCOUNT_ID' 的 Secret（注意大小写）"
+            echo "3. Secret 名称必须完全一致：CLOUDFLARE_ACCOUNT_ID"
+            echo "4. 如果不存在，点击 'New repository secret' 创建"
+            echo "5. 如果已存在，检查值是否为空"
             exit 1
           fi
+          
           echo "✓ Secrets 配置正确"
 
       - name: Deploy to Cloudflare Pages
