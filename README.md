@@ -72,6 +72,26 @@ npm run preview
 
 > **提示**：`npm run dev` 会自动构建项目并启动预览服务器。如果你修改了代码，需要重新运行 `npm run dev` 来重新构建和预览。
 
+## Cloudflare Pages 部署
+
+### 配置说明
+
+在 Cloudflare Pages 中配置以下设置：
+
+- **框架预设**：None 或 Other
+- **构建命令**：`npm install && npm run build`
+- **构建输出目录**：`dist`
+- **根目录**：`/`（留空）
+- **Node.js 版本**：`20`（根据 `.nvmrc` 文件）
+
+### 环境变量
+
+通常不需要额外的环境变量。
+
+### 自动部署
+
+连接 GitHub 仓库后，每次推送到主分支（main/master）都会自动触发构建和部署。
+
 ## 自定义网站列表
 
 编辑 `src/data/sites.ts` 文件，修改 `siteGroups` 数组来添加或修改网站：
