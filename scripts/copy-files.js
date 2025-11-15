@@ -42,6 +42,14 @@ if (fs.existsSync(publicDir)) {
   console.log('✓ public 目录已复制');
 }
 
+// 复制 _headers 文件到 dist 目录（如果存在）
+const publicHeaders = path.join(publicDir, '_headers');
+const distHeaders = path.join(distDir, '_headers');
+if (fs.existsSync(publicHeaders)) {
+  fs.copyFileSync(publicHeaders, distHeaders);
+  console.log('✓ _headers 文件已复制');
+}
+
 // 同时创建 img 目录的符号链接或直接复制到 dist/img（为了兼容性）
 const publicImgDir = path.join(publicDir, 'img');
 const distImgDir = path.join(distDir, 'img');
