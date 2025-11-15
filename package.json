@@ -1,27 +1,25 @@
 {
   "name": "newtab-navigation",
   "version": "1.0.0",
-  "description": "功能丰富的网站导航网站，由 Cloudflare Pages 驱动",
+  "description": "功能丰富的网站导航网站",
   "main": "index.js",
   "scripts": {
     "build": "tsc && npm run build:assets",
     "build:assets": "npm run copy:html && npm run copy:css",
     "copy:html": "node scripts/copy-files.js",
     "copy:css": "node scripts/copy-css.js",
-    "dev": "npm run build && wrangler pages dev dist",
-    "deploy": "npm run build && wrangler pages deploy dist"
+    "dev": "npm run build && npm run preview",
+    "preview": "serve dist -l 3000 -s"
   },
   "keywords": [
     "navigation",
-    "cloudflare-pages",
     "newtab"
   ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241106.0",
-    "typescript": "^5.3.3",
-    "wrangler": "^3.58.0"
+    "serve": "^14.2.1",
+    "typescript": "^5.3.3"
   }
 }
 

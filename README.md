@@ -1,13 +1,12 @@
 # 网站导航 - NewTab Navigation
 
-一个功能丰富的网站导航网站，由 Cloudflare Pages 驱动。支持网站分组展示、多搜索引擎选择等功能。
+一个功能丰富的网站导航网站，支持网站分组展示、多搜索引擎选择等功能。
 
 ## 功能特性
 
 - 🎯 **网站导航**: 展示网站图标和名称，点击后在新标签页打开
 - 📁 **分组展示**: 网站按类别进行分组展示
 - 🔍 **多搜索引擎**: 支持百度、谷歌、GitHub 三种搜索引擎
-- 🚀 **快速部署**: 自动部署到 Cloudflare Pages
 - 💻 **响应式设计**: 适配桌面端和移动端
 
 ## 技术栈
@@ -15,7 +14,6 @@
 - **TypeScript**: 类型安全的开发体验
 - **JavaScript**: 前端交互逻辑
 - **HTML/CSS**: 页面结构和样式
-- **Cloudflare Pages**: 静态网站托管和部署
 
 ## 项目结构
 
@@ -32,11 +30,7 @@
 │   └── main.css              # 样式文件
 ├── index.html                # 入口 HTML 文件
 ├── package.json              # 项目配置
-├── tsconfig.json             # TypeScript 配置
-├── wrangler.toml             # Cloudflare Workers 配置
-└── .github/
-    └── workflows/
-        └── deploy.yml        # GitHub Actions 自动部署
+└── tsconfig.json             # TypeScript 配置
 ```
 
 ## 本地开发
@@ -58,66 +52,25 @@ npm install
 npm run build
 ```
 
+构建后的文件会在 `dist` 目录中。
+
 ### 本地预览
+
+构建完成后，启动本地预览服务器：
 
 ```bash
 npm run dev
 ```
 
-## 部署到 Cloudflare Pages
+或者只预览（需要先构建）：
 
-> 📖 **详细部署指南**: 请查看 [DEPLOY.md](./DEPLOY.md) 获取完整的部署步骤和故障排除指南。
+```bash
+npm run preview
+```
 
-### 方式一：使用 GitHub Actions 自动部署（推荐）
+预览服务器会在 `http://localhost:3000` 启动，在浏览器中打开该地址即可查看网站。
 
-1. **Fork 或克隆此仓库到你的 GitHub 账号**
-
-2. **获取 Cloudflare API Token**
-   - 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - 进入 "My Profile" → "API Tokens"
-   - 点击 "Create Token"
-   - 使用 "Edit Cloudflare Workers" 模板，或创建自定义令牌，需要以下权限：
-     - Account: `Cloudflare Pages:Edit`
-     - Zone: `Zone:Read` (如果需要自定义域名)
-
-3. **获取 Account ID**
-   - 在 Cloudflare Dashboard 右侧栏可以看到 Account ID
-
-4. **配置 GitHub Secrets**
-   - 进入你的 GitHub 仓库
-   - Settings → Secrets and variables → Actions
-   - 添加以下 Secrets:
-     - `CLOUDFLARE_API_TOKEN`: 你的 API Token
-     - `CLOUDFLARE_ACCOUNT_ID`: 你的 Account ID
-
-5. **推送代码到 main 分支**
-   ```bash
-   git push origin main
-   ```
-   
-   推送后，GitHub Actions 会自动触发构建和部署。
-
-### 方式二：手动部署
-
-1. **安装 Wrangler CLI**
-   ```bash
-   npm install -g wrangler
-   ```
-
-2. **登录 Cloudflare**
-   ```bash
-   wrangler login
-   ```
-
-3. **构建项目**
-   ```bash
-   npm run build
-   ```
-
-4. **部署**
-   ```bash
-   npm run deploy
-   ```
+> **提示**：`npm run dev` 会自动构建项目并启动预览服务器。如果你修改了代码，需要重新运行 `npm run dev` 来重新构建和预览。
 
 ## 自定义网站列表
 
