@@ -38,18 +38,27 @@ jobs:
           echo "🔍 检查项目是否存在..."
           
           # 检查项目是否存在
-          RESPONSE=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/newtab-navigation" \
+          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/newtab-navigation" \
             -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
             -H "Content-Type: application/json")
           
-          # 解析响应，检查是否成功
-          if echo "$RESPONSE" | grep -q '"success":true'; then
+          HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS" | cut -d: -f2)
+          BODY=$(echo "$RESPONSE" | sed '/HTTP_STATUS/d')
+          
+          echo "HTTP 状态码: $HTTP_STATUS"
+          
+          # 如果项目存在 (200) 或成功响应
+          if [ "$HTTP_STATUS" = "200" ] && echo "$BODY" | grep -q '"success":true'; then
             echo "✅ 项目已存在"
-          else
+            exit 0
+          fi
+          
+          # 如果项目不存在 (404)，创建项目
+          if [ "$HTTP_STATUS" = "404" ]; then
             echo "📦 项目不存在，正在创建..."
             
             # 创建项目
-            CREATE_RESPONSE=$(curl -s -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects" \
+            CREATE_RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects" \
               -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
               -H "Content-Type: application/json" \
               -d '{
@@ -57,14 +66,30 @@ jobs:
                 "production_branch": "main"
               }')
             
-            if echo "$CREATE_RESPONSE" | grep -q '"success":true'; then
-              echo "✅ 项目创建成功"
-            elif echo "$CREATE_RESPONSE" | grep -q "already exists"; then
+            CREATE_HTTP_STATUS=$(echo "$CREATE_RESPONSE" | grep "HTTP_STATUS" | cut -d: -f2)
+            CREATE_BODY=$(echo "$CREATE_RESPONSE" | sed '/HTTP_STATUS/d')
+            
+            echo "创建响应 HTTP 状态码: $CREATE_HTTP_STATUS"
+            echo "创建响应内容: $CREATE_BODY"
+            
+            if [ "$CREATE_HTTP_STATUS" = "200" ] && echo "$CREATE_BODY" | grep -q '"success":true'; then
+              echo "✅ 项目创建成功！"
+              # 等待一秒确保项目完全创建
+              sleep 2
+            elif echo "$CREATE_BODY" | grep -q "already exists\|duplicate"; then
               echo "✅ 项目已存在（可能在创建过程中已创建）"
             else
-              echo "⚠️ 创建项目时可能遇到问题，但继续部署..."
-              echo "响应: $CREATE_RESPONSE"
+              echo "❌ 创建项目失败"
+              echo "错误详情: $CREATE_BODY"
+              echo "⚠️ 请手动在 Cloudflare Dashboard 创建项目 'newtab-navigation'，然后重新运行此工作流"
+              exit 1
             fi
+          else
+            echo "❌ 检查项目时出现错误"
+            echo "HTTP 状态码: $HTTP_STATUS"
+            echo "响应内容: $BODY"
+            echo "⚠️ 请检查 API Token 权限和 Account ID 是否正确"
+            exit 1
           fi
 
       - name: Check Secrets
