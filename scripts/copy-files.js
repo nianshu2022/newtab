@@ -53,3 +53,10 @@ if (fs.existsSync(publicImgDir)) {
   console.log('✓ img 目录已复制到 dist/img');
 }
 
+// 删除可能存在的旧 _redirects 文件（如果有问题）
+const oldRedirects = path.join(distDir, '_redirects');
+if (fs.existsSync(oldRedirects)) {
+  fs.unlinkSync(oldRedirects);
+  console.log('✓ 已删除旧的 _redirects 文件');
+}
+
