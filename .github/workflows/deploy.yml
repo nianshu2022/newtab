@@ -30,6 +30,20 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Check Secrets
+        run: |
+          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
+            echo "❌ 错误: CLOUDFLARE_API_TOKEN 未配置"
+            echo "请在 GitHub 仓库 Settings → Secrets and variables → Actions 中添加 CLOUDFLARE_API_TOKEN"
+            exit 1
+          fi
+          if [ -z "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ]; then
+            echo "❌ 错误: CLOUDFLARE_ACCOUNT_ID 未配置"
+            echo "请在 GitHub 仓库 Settings → Secrets and variables → Actions 中添加 CLOUDFLARE_ACCOUNT_ID"
+            exit 1
+          fi
+          echo "✓ Secrets 配置正确"
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
