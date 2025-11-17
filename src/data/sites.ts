@@ -194,10 +194,10 @@ export const siteGroups: SiteGroup[] = [
         id: "uptime",
         name: "Uptime",
         url: "https://uptime.nianshu2022.cn",
-        icon: "https://uptime.nianshu2022.cn/favicon.ico"
+        icon: "https://uptime.nianshu2022.cn/favicon.png"
       },
       {
-        id: "mv",
+        id: "moon-tv",
         name: "MoonTV",
         url: "https://mv.nianshu2022.cn",
         icon: "https://mv.nianshu2022.cn/favicon.ico"
