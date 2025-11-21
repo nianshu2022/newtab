@@ -59,20 +59,15 @@ class NavigationApp {
       return;
     }
 
-    console.log('📦 开始渲染导航，分组数量:', siteGroups.length);
-    
     if (siteGroups.length === 0) {
       console.warn('⚠️ siteGroups 为空，没有数据可显示');
       return;
     }
 
     siteGroups.forEach(group => {
-      console.log('📁 渲染分组:', group.name, '网站数量:', group.sites.length);
       const groupElement = this.createGroupElement(group);
       this.navigationContainer?.appendChild(groupElement);
     });
-    
-    console.log('✅ 导航渲染完成');
   }
 
   private createGroupElement(group: typeof siteGroups[0]): HTMLElement {
@@ -100,9 +95,12 @@ class NavigationApp {
   }
 
   private createSiteElement(site: typeof siteGroups[0]['sites'][0]): HTMLElement {
-    const siteDiv = document.createElement('div');
-    siteDiv.className = 'site-item';
-    siteDiv.setAttribute('data-site-id', site.id);
+    const siteLink = document.createElement('a');
+    siteLink.className = 'site-item';
+    siteLink.href = site.url;
+    siteLink.target = '_blank';
+    siteLink.rel = 'noopener noreferrer';
+    siteLink.setAttribute('data-site-id', site.id);
 
     const icon = document.createElement('img');
     icon.className = 'site-icon';
@@ -117,15 +115,10 @@ class NavigationApp {
     name.className = 'site-name';
     name.textContent = site.name;
 
-    siteDiv.appendChild(icon);
-    siteDiv.appendChild(name);
+    siteLink.appendChild(icon);
+    siteLink.appendChild(name);
 
-    // 点击打开新标签页
-    siteDiv.addEventListener('click', () => {
-      window.open(site.url, '_blank');
-    });
-
-    return siteDiv;
+    return siteLink;
   }
 }
 
