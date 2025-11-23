@@ -203,10 +203,10 @@ export const siteGroups: SiteGroup[] = [
         icon: "https://mv.nianshu2022.cn/favicon.ico"
       },
       {
-        id: "nginx",
-        name: "Nginx",
-        url: "https://nginx.nianshu2022.cn",
-        icon: "https://nginx.nianshu2022.cn/images/favicons/favicon.ico"
+        id: "my-portfolio",
+        name: "数字花园",
+        url: "https://nianshu2022.cn",
+        icon: "https://nianshu2022.cn/favicon.ico?favicon.0b3bf435.ico"
       }
     ]
   }
