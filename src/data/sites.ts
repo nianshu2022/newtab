@@ -205,8 +205,8 @@ export const siteGroups: SiteGroup[] = [
       {
         id: "my-portfolio",
         name: "数字花园",
-        url: "https://nianshu2022.cn",
-        icon: "https://nianshu2022.cn/favicon.ico?favicon.0b3bf435.ico"
+        url: "https://blog.nianshu2022.cn",
+        icon: "https://blog.nianshu2022.cn/favicon.ico?favicon.0b3bf435.ico"
       }
     ]
   }
